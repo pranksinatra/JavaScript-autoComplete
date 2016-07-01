@@ -114,8 +114,10 @@ var autoComplete = (function(){
             };
             addEvent(that, 'blur', that.blurHandler);
 
-            var suggest = function(data){
-                var val = that.value;
+            // value is an optional parameter that can be passed explicitly. Passing it ensures that the term passed to the 
+            // source function to generate matches is used, instead of a more recent input value.
+            var suggest = function(data, value){
+                var val = value || that.value;
                 that.cache[val] = data;
                 if (data.length && val.length >= o.minChars) {
                     var s = '';
